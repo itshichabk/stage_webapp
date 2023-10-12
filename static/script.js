@@ -73,7 +73,7 @@ function popup(req, name, type, details)
     }
 }
 
-function showfactpop(id, label, pu, qte) 
+function showfactpop(id, label, pu, qte)
 {
     pop = document.getElementById('popup');
     factpop = document.getElementById('factpop');
