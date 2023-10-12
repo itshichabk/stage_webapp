@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/style.css') }}">
+    <link
+    rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Menu principal</title>
+</head>
+
+<body>
+    <div id="cont">
+        <nav class="w3-center w3-animate-left">
+            <img id="pfp" src="https://pbs.twimg.com/profile_images/1349368692342185986/bAo_v93f_400x400.jpg">
+            <ul>
+                <li><a href= "{{ url_for('produits', req='list') }}" style="color: #FFFFFF">Produits </a> <br></li>
+                <li><a href= "{{ url_for('commandes', req='list') }}" style="color: #FFFFFF">Lignes de commande </a> <br></li>
+                <li><a href= "{{ url_for('factures') }}" style="color: #FFFFFF">Factures</a></li>
+            </ul>
+        </nav>
+        <div class="section">
+            
+            <div class="w3-center w3-animate-top">
+                <div class="headtitle">
+                    <h1>Menu principal</h1>
+                </div>
+            </div>
+            <h2>Choisissez une option:</h2>
+            <div class="index">
+            <a href= "{{ url_for('produits', req='list') }}" >Produits </a> |
+            <a href= "{{ url_for('commandes', req='list') }}" >Lignes de commande </a> |
+            <a href= "{{ url_for('factures') }}" >Factures</a>     
+            </div>
+            <p onclick="$('nav').hide();">Hide</p>
+            <p onclick="$('nav').show();">Show</p>   
+            <p onclick="darkmode();">Dark</p>   
+            <p onclick="lightmode();">Light</p>  
+    
+        </div>
+        <script src="{{ url_for('static', filename='script.js') }}"></script>
+    </div>
+</body>
+
+</html>

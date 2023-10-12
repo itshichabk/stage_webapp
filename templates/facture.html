@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/style.css') }}">
+    <title>Facture</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <div id="cont">
+        <nav>
+            <img id="pfp" src="https://pbs.twimg.com/profile_images/1349368692342185986/bAo_v93f_400x400.jpg" />
+            <ul>
+                <li><a href= "{{ url_for('produits', req='list') }}" style="color: #FFFFFF">Produits </a> <br></li>
+                <li><a href= "{{ url_for('commandes', req='list') }}" style="color: #FFFFFF">Lignes de commande </a> <br></li>
+                <li><a href= "{{ url_for('factures') }}" style="color: #FFFFFF">Factures</a></li>
+            </ul>
+        </nav>
+    <div class="section">
+        <div id="back">
+            <a href= "{{ url_for('factures') }}"><img id="backimg" src="{{ url_for('static', filename='back.png') }}"/></a>
+        </div>
+        <div class="fact">
+            <div class="center">
+                <h1>FACTURE</h1>
+                <h3>ID: {{id}}</h3>
+            </div>
+            <div class="factcontent">
+                <ul>
+                {% for row in data %}
+                <li><h2> {{row[2]}}x {{row[0]}} </h2></li>
+                <p> Prix unitaire: {{row[1]}} </p>
+                <p> Montant HT: {{'%0.2f'|format(( row[2] * row[1] )|float)}} </p>
+                <p> TVA: {{'%0.2f'|format(( (row[2] * row[1])*0.3 )|float)}} </p>
+                <h3>TTC: {{'%0.2f'|format(( (row[2] * row[1])*1.3 )|float)}}</h3>
+                {% endfor %}
+                </ul>
+            </div>
+            <br>
+            {% for ttcval in ttc %}
+            <div class="center"><h2>
+                Total TTC: {{'%0.2f'|format(( ttcval )|float)}}</h2>
+            </div>
+            {% endfor %}
+        </div>
+        <br><!--h3><div class="center"><a href="{{ url_for('factures') }}">Retour</a></div></h3-->
+        </div>
+        </div>
+</body>
+</html>

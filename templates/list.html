@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/style.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Liste des {{ pagename }}</title>
+</head>
+
+<body>
+    <div id="popup">
+        <div class="overlay"></div>
+        <div id="win" class="animate__animated animate__bounce">
+            <div id="del">
+                <h2>DELETE PROMPT</h2>
+                <div id="details"></div>
+                <div class="popbtn">
+                    <a class="yes">Oui</a>
+                    <a onclick="closepopup();" class="no">Non</a>
+                </div>
+            </div>
+            <div id="edit">
+                <h2>EDIT PROMPT</h2>
+                <div class="popbtn">
+                    <a class="yes">OK</a>
+                    <a class="no">Annuler</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="cont">
+        <nav>
+            <img id="pfp" src="https://pbs.twimg.com/profile_images/1349368692342185986/bAo_v93f_400x400.jpg" />
+            <ul>
+                <li><a href= "{{ url_for('produits', req='list') }}" style="color: #FFFFFF">Produits </a> <br></li>
+                <li><a href= "{{ url_for('commandes', req='list') }}" style="color: #FFFFFF">Lignes de commande </a> <br></li>
+                <li><a href= "{{ url_for('factures') }}" style="color: #ffffff">Factures</a></li>
+            </ul>
+        </nav>
+
+        <div class="section">  
+            <div class="headr">
+                <div class="headtitle">
+                    {% if req == 'list' or type == 'f' %}
+                    <h1>Liste des {{ pagename }}</h1>
+                    {% elif type=='p' %}
+                    <h2>Sélectionnez le produit commandé</h2>
+                    {% elif type=='l' %}
+                    <h2>Sélectionnez les lignes de commande</h2>
+                    {% endif %}
+                </div>
+            </div>
+    <!--div id="factpop">
+        <div class="center">
+            <h1>FACTURE</h1>
+            <h3>ID: {{id}}</h3>
+        </div>
+        <div class="factcontent">
+            {% for row in datapop %}
+            <li><h2> {{row[2]}}x {{row[0]}} </h2></li>
+            <p> Prix unitaire: {{row[1]}} </p>
+            <p> Montant HT: {{'%0.2f'|format(( row[2] * row[1] )|float)}} </p>
+            <p> TVA: {{'%0.2f'|format(( (row[2] * row[1])*0.3 )|float)}} </p>
+            <h3>TTC: {{'%0.2f'|format(( (row[2] * row[1])*1.3 )|float)}}</h3>
+            {% endfor %}
+        </div>
+        <br>
+        {% for ttcval in ttc %}
+        <div class="center"><h2>
+            Total TTC: {{'%0.2f'|format(( ttcval )|float)}}</h2>
+        </div>
+        {% endfor %}
+    </div-->
+            <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
+            <table border="1" class="sortable">
+                <tr class="item">
+                    <th class="idcol">ID</th>
+                    {% if type == "p" %}
+                        <th class="namecol">Nom</th>
+                        <th class="price">Prix unitaire</th>
+                        <th class="qte">Restants</th>
+                    {% elif type == "l" %}
+                        <th class="namecol">Produit</th>
+                        <th class="price">Prix unitaire</th>
+                        <th class="qte">Quantité</th>
+                        <th class="price">Total</th>
+                        {% if req == 'list' %}
+                        <th class="statrow">Statut</th>
+                        {% endif %}
+                    {% else %}
+                        <th class="namecol">Produits</th>
+                        <th class="price">Total HT</th>
+                        <th class="price">Total TTC</th>
+                        <th>Statut</th>
+                    {% endif %}
+                    {% if type=='l' and req=='select' %}
+                    <th class="action">Sélectionner</th>
+                    {% elif type=='p' and req=='list' %}
+                    <th class="actionp">Action</th>
+                    {% else %}
+                    <th class="action">Action</th>
+                    {% endif %}
+                </tr>
+
+            {% if type == "p" %}
+                {% if req == 'list' %}
+                {% for row in data %}
+                <tr class="item">
+                    <td>{{row[1]}}</td>
+                    <td>{{row[0]}}</td>
+                    <td>{{row[2]}}</td>
+                    <td class="qte">{{row[3]}}</td>
+                    <td>
+                        <a href="{{ url_for('edit', type=type, id=row[1]) }}" class="edit">Modifier</a>
+                        <!-- p class="edit" onclick="popup('e', 'p');">Modifier</p-->
+                        <!--a href="{{ url_for('delete', type=type, id=row[1]) }}" class="delete" onclick="return confirm('Êtes-vous sûr?')">Supprimer</a-->
+                        <a class="delete" onclick="popup('d', '{{row[0]}}', 'p', 'Prix: {{row[2]}} <br>ID: {{row[1]}}');">Supprimer</a>
+                        <script>
+                            yes = document.querySelector("#del .popbtn .yes");
+                            yes.onclick = function() {
+                                window.location = "{{ url_for('delete', type=type, id=row[1]) }}";
+                            }
+                        </script>
+                    </td>
+                </tr>
+                {% endfor %}
+                {% elif req == 'select' %}
+                {% for row in data if row[3] > 0 %}
+                <tr class="item">
+                    <td>{{row[1]}}</td>
+                    <td>{{row[0]}}</td>
+                    <td>{{row[2]}}</td>
+                    <td>{{row[3]}}</td>
+                    <td><a href="{{ url_for('add', type='l', id=row[1]) }}" class="select">Sélectionner</a></td>
+                </tr>
+                {% endfor %}
+                {% endif %}
+            </table>
+                {% if req == 'list' %}
+                <div class="btmbtn">
+                <a href="{{ url_for('add', type=type, id='new') }}" class="add">Ajouter</a>
+                {% endif %}
+
+            {% elif type == "l" %}
+            {% if req == 'list' %}
+                {% for row in data %}
+                <tr class="item">
+                    <td>{{row[0]}}</td>
+                    <td>{{row[1]}}</td>
+                    <td>{{row[2]}}</td>
+                    <td>{{row[3]}}</td>
+                    {% set tot = '%0.2f'|format(( row[2] * row[3] )|float) %}
+                    <td>{{tot}}</td>
+                    {% if row[4] == 0 %}
+                    <td class="stat">Non traité</td>
+                    <td><a href="{{ url_for('edit', type=type, id=row[0]) }}" class="edit">Modifier</a><br>
+                    {% else %}
+                    <td class="stat">Traité</td>
+                    <td>
+                    {% endif %}
+                    <a class="delete" onclick=
+                    "popup('d', '{{row[0]}}', 'l', 'Produit: {{row[1]}} <br>Quantité: {{row[3]}} <br>Total: {{tot}}');">Supprimer</a>
+                    <script>
+                        yes = document.querySelector("#del .popbtn .yes");
+                        yes.onclick = function() {
+                            window.location = "{{ url_for('delete', type=type, id=row[0]) }}";
+                        }
+                    </script>
+                </tr>
+                {% endfor %}
+            </table>
+        <div class="btmbtn"> <a href="{{ url_for('produits', req='select') }}" class="add">Ajouter</a>
+        
+        {% elif req == 'select' %}
+        <form method="POST" action="">
+        {% for row in data if row[4] == 0 %}
+            <tr class="item">
+                <td>{{row[0]}}</td>
+                <td>{{row[1]}}</td>
+                <td>{{row[2]}}</td>
+                <td>{{row[3]}}</td>
+                <td>{{'%0.2f'|format(( row[2] * row[3] )|float)}}</td>
+                <td><input type="checkbox" name="commandes" value= {{row[0]}}></td>
+            </tr>
+        {% endfor %}
+        </table>
+        <br>
+       <div class="btmbtn">
+            <input type="submit" class="submit" value="Soumettre">
+            <a href="{{ url_for('factures') }}" class="return">Retour</a>
+       </div>
+        </form>
+    {% endif %}
+
+    {% elif type == "f" %}
+        {% for row in data %}
+        <tr class="item">
+            <td>{{row[0]}}</td>
+            {% autoescape false %}
+            <td>{{row[1]}}</td>
+            {% endautoescape %}
+            <td>{{row[2]}}</td>
+            <td>{{row[3]}}</td>
+            {% if row[4] == 0 %}
+                <td class="stat">Non traité</td>
+            {% else %}
+                <td class="stat">Traité</td>
+            {% endif %}
+            <td>
+                {% if row[4] == 0 %}
+                <a href="{{ url_for('edit', type=type, id=row[0]) }}" class="traite">Définir comme traité</a><br>
+                {% endif %}
+                <a href="{{ url_for('factdoc', id=row[0]) }}" class="factbtn">Consulter facture</a><br>
+                <!--a class="factbtn" onclick="showfactpop('{{row[0]}}', '{{row}}');">Consulter facture</a-->
+
+                <a class="delete" onclick="popup('d', '{{row[0]}}', 'f', '{{row[1]}} <br><br>TTC: {{row[3]}}');">Supprimer</a>
+                <script>
+                    yes = document.querySelector("#del .popbtn .yes");
+                    yes.onclick = function() {
+                        window.location = "{{ url_for('delfact', id=row[0], stat=row[4]) }}";
+                    }
+                </script>
+            </td>
+        </tr>
+        {% endfor %}
+         </table>
+        <div class="btmbtn">
+         <a href="{{ url_for('commandes', req='select') }}" class="add">Ajouter</a>
+    {% endif %}
+
+        {% if req == 'list' or type == 'f' %}
+        <a href="{{ url_for('index') }}" class="return">Retour</a>
+        {% elif type == 'p' %}
+        <a href="{{ url_for('commandes', req='list') }}" class="return">Retour</a>
+        {% elif type == 'l' and req == 'list' %}
+        <a href="{{ url_for('factures') }}" class="return">Retour</a>
+        {% endif %}
+        <p onclick="$('nav').hide();">Hide</p>
+        <p onclick="$('nav').show();">Show</p>
+        <p onclick="darkmode();">Dark</p>   
+    </div>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

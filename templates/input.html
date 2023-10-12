@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/style.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Title</title>
+</head>
+
+<body>
+<div id="cont">
+    <nav>
+        <img id="pfp" src="https://pbs.twimg.com/profile_images/1349368692342185986/bAo_v93f_400x400.jpg" />
+        <ul>
+            <li><a href= "{{ url_for('produits', req='list') }}" style="color: #FFFFFF">Produits </a> <br></li>
+            <li><a href= "{{ url_for('commandes', req='list') }}" style="color: #FFFFFF">Lignes de commande </a> <br></li>
+            <li><a href= "{{ url_for('factures') }}" style="color: #FFFFFF">Factures</a></li>
+        </ul>
+    </nav>
+    <div class="section">
+        <form method="POST" action="">
+        {% if type == "p" %}
+            {% if req == "edit" %}
+                <div class="headtitle"><h2>Modification de produit</h2></div>
+                <div class="continput">
+                {% for row in data %}
+                Nom de produit <br><input value={{row[0]}} name="label" type="text" required/> <br>
+                Prix unitaire <br><input value={{row[1]}} name="pu" type="number" step="0.01" min="0.01" required/> <br>
+                Quantité <br><input value={{row[2]}} name="qte" type="number" step="0" min="0" required/> <br>
+                {% endfor %}
+                </div>
+            {% else %}
+                <div class="headtitle"><h2>Entrez les données du nouveau produit</h2></div>
+                <div class="continput">
+                Nom de produit <br><input name="label" type="text" required/> <br>
+                Prix unitaire <br><input name="pu" type="number" step="0.01" min="0.01" required/> <br>
+                Quantité <br><input name="qte" type="number" step="0" min="1" required/> <br>
+                </div>
+            {% endif %}
+        {% elif type == "l" %}
+            {% if req == "edit" %}
+            <div class="headtitle"><h2>Modification de commande</h2></div>
+            <div class="continput">
+                {% for row in data %}
+                Quantité commandée <br><input value={{row[0]}} name="qte" type="number" min="1" max={{rest + row[0]}} required/> <br>
+                Statut<br>
+                <select name="stat" id="stat">
+                    <option value="nontraite"
+                            {% if row[1] == 0 %}
+                            selected
+                            {% endif %}>
+                        Non traité</option>
+                    <option value="traite"
+                            {% if row[1] == 1 %}
+                            selected
+                            {% endif %}>
+                        Traité</option>
+                </select>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="headtitle"><h2>Entrez la quantité commandée</h2></div>
+            <div class="continput">
+                Quantité <br> <input name="qte" type="number"  min="1" max={{rest}} required/> <br>
+            </div>
+            {% endif %}
+        {% endif %}
+
+        <div class="btmbtn">
+        <input type="submit" class="submit" value="Soumettre">
+        {% if type == 'p' %}
+        <a href="{{ url_for('produits', req='list') }}" class="return">Retour</a>
+        {% elif type == 'l' and req == "add" %}
+        <a href="{{ url_for('produits', req='select') }}" class="return">Retour</a>
+        {% else %}
+        <a href="{{ url_for('commandes', req='list') }}" class="return">Retour</a>
+        {% endif %}
+        </div>
+        </form>
+    </div>
+    <p onclick="$('nav').hide();">Hide</p>
+    <p onclick="$('nav').show();">Show</p>
+</div>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

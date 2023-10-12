@@ -1,0 +1,490 @@
+.header {
+  background-color: #003366;
+  color: white;
+  text-align: center;
+  width: 100%;
+  left: 0;
+  font-size: 20px;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #003366;
+  color: white;
+  text-align: center;
+}
+
+body
+{
+    font-family: "SF UI Display", "Segoe UI";
+    overflow: hidden;
+    height: 100vh;
+    margin: 0;
+}
+
+.center
+{
+    text-align: center;
+}
+
+ul
+{
+    font-size: 18px;
+}
+
+input
+{
+    text-align: left;
+}
+
+td
+{
+    padding: 8px;
+    text-align: left;
+}
+
+table
+{
+    border: 3px navy inset;
+    box-shadow: 12px 12px 12px #00000077;
+    margin: auto;
+    margin-bottom: 20px;
+    width: 80%;
+    border-collapse: collapse;
+    padding: 15px;
+ }
+
+table tr th
+{
+    font-size: 18px;
+    padding: 3px;
+    background-color: #004d99;
+    color: white;
+    border-color: black;
+}
+
+
+img#pfp
+{
+    max-width: 100px;
+    max-height: 100px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
+    margin-bottom: 50px;
+    box-shadow: 12px 12px 12px #00000077;
+
+}
+
+
+#backimg
+{
+  max-width: 60px;
+  max-height: 60px;
+  position: absolute;
+  top: 25px;
+  left: 35px;
+}
+
+.fact
+{
+    text-align: left;
+    width: 400px;
+    border: 2px navy inset;
+    box-shadow: 6px 6px 0px gray;
+    padding: 30px;
+    margin: auto;
+    margin-top: 30px;
+    
+}
+
+.factcontent
+{
+    text-align: left;
+}
+
+nav
+{
+  background-color: #336699;
+  color: white;
+  height: 100%;
+  flex: 1;
+  padding: 1rem;
+  min-width: 180px;
+  width: 250px;
+  box-shadow: 12px 12px 12px #00000077;
+}
+
+
+nav li
+{
+  margin: 10px;
+}
+
+.section
+{
+    position: relative;
+    text-align: center;
+    flex: 5;
+    height: 100%;
+    overflow-y: auto;
+    margin: 0px auto;
+}
+
+#cont
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+
+.edit
+{
+  background-color: #cc9900; /* Green */
+  border: none;
+  color: white;
+  padding: 3px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-bottom: 5px;
+  width: 140px;
+}
+
+.edit:hover
+{
+    background-color: #e6ac00;
+    box-shadow: 0px 0px 12px #00000077;
+}
+
+.delete
+{
+  background-color: #cc0000; /* Green */
+  border: none;
+  color: white;
+  padding: 3px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  width: 140px;
+}
+
+.delete:hover
+{
+    background-color:  #ff3300;
+    cursor: pointer;
+    box-shadow: 0px 0px 12px #00000077;
+}
+
+.factbtn
+{
+  background-color:  #0066ff; /* Green */
+  border: none;
+  color: white;
+  padding: 3px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-bottom: 5px;
+  width: 140px;
+}
+
+.factbtn:hover
+{
+    background-color: #3385ff;
+    box-shadow: 0px 0px 12px #00000077;
+}
+
+.traite
+{
+  background-color: #009933;
+  border: none;
+  color: white;
+  padding: 3px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-bottom: 5px;
+  width: 140px;
+}
+
+.traite:hover
+{
+    background-color: #00e64d;
+    box-shadow: 0px 0px 12px #00000077;
+}
+
+.select
+{
+  background-color: #009933;
+  border: none;
+  color: white;
+  padding: 3px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  width: 100px;
+}
+
+.select:hover
+{
+    background-color: #00e64d;
+    box-shadow: 0px 0px 12px #00000077;
+}
+
+
+.add
+{
+  background-color: #006666;
+  border: none;
+  color: white;
+  padding: 3px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 21px;
+  margin: 15px;
+  box-shadow: 2px 2px 0px gray;
+}
+
+.add:hover
+{
+    background-color: #009999;
+    box-shadow: 0px 0px 12px #00000077;
+}
+
+.return
+{
+  background-color: #ff8000;
+  border: none;
+  color: white;
+  padding: 3px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 21px;
+  margin: 15px;
+  box-shadow: 2px 2px 0px gray;
+}
+
+.return:hover
+{
+    background-color: #ffa64d;
+    box-shadow: 0px 0px 12px #00000077;
+}
+
+.btmbtn
+{
+    margin-top: 15px;
+}
+
+input[type=text] {
+    width: 350px;
+    padding: 4px;
+    margin: 8px 0;
+    font-size: 16px;
+}
+
+input[type=number]
+{
+  padding: 4px;
+  margin: 8px 0;
+  font-size: 16px;
+}
+
+input[type=checkbox]
+{
+  width: 20px;
+  height: 20px;
+}
+
+select
+{
+  padding: 4px;
+  margin: 8px 0;
+  font-size: 16px;
+}
+
+.submit
+{
+  background-color: #00cc00;
+  border: none;
+  color: white;
+  padding: 3px 10px;
+  text-align: center;
+  display: inline-block;
+  font-size: 21px;
+  margin: 15px;
+  box-shadow: 2px 2px 0px gray;
+  font-family: 'SF UI Display', 'Segoe UI';
+}
+
+.submit:hover
+{
+    background-color: #00ff00;
+    cursor: pointer;
+    box-shadow: 0px 0px 12px #00000077;
+}
+
+.continput
+{
+    text-align: left;
+    display: inline-block;
+}
+
+
+
+#popup .overlay
+{
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.7);
+  width: 100%;
+  height: 100%;
+  top: 0px;
+}
+
+.headtitle
+{
+  text-align: center;
+  padding: 1px;
+  background-color: #003366;
+  color: white;
+  margin-bottom: 30px;
+}
+
+#popup, #del, #edit
+{
+  display: block;
+}
+
+#popup #win
+{
+  position: absolute;
+  background-color: white;
+  display: inline-block;
+  margin: auto;
+  left: 0;
+  right: 0;
+  bottom: 50%;
+  width: 360px;
+  padding: 20px;
+  box-shadow: 0px 0px 8px #000000a9;
+  border-radius: 1%;
+}
+
+.popbtn
+{
+  text-align: right;
+  font-size: 18px;
+  color: white;
+}
+
+.yes
+{
+  background-color: green;
+  margin-right: 15px;
+  padding: 5px 20px;
+}
+
+.no
+{
+  background-color: red;
+  padding: 5px 20px;
+}
+
+.yes:hover
+{
+  background-color: rgb(42, 187, 42);
+  cursor: pointer;
+  box-shadow: 0px 0px 12px #00000077;
+}
+
+.no:hover
+{
+  background-color: rgb(255, 67, 67);
+  cursor: pointer;
+  box-shadow: 0px 0px 12px #00000077;
+}
+
+.idcol
+{
+  width: 5%;
+}
+
+.namecol
+{
+  width: 40%;
+}
+
+.price
+{
+  width: 12%;
+}
+
+.qte
+{
+  width: 5%;
+}
+
+.action
+{
+  width: 10%;
+}
+
+.statrow
+{
+  width: 10%;
+}
+
+.actionp
+{
+  width: 1%;
+}
+
+.item > th
+{
+  cursor: pointer;
+}
+
+.index
+{
+  font-size: 20px;
+  margin: 16px;
+}
+
+@keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+
+@keyframes fadeOut {
+  100% {opacity:1;}
+  0% {opacity:0;}
+}
+
+#factpop
+{
+  position: absolute;
+  background-color: white;
+  display: none;
+  margin: auto;
+  left: 0;
+  right: 0;
+  bottom: 50%;
+  width: 360px;
+  padding: 20px;
+  box-shadow: 12px 12px 12px #00000077;
+  border-radius: 1%;
+}
